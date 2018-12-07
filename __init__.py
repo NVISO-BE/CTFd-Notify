@@ -33,7 +33,13 @@ def load(app):
             server_secret = get_config('thunderpush_server_secret')
             thunderpush_url = get_config('thunderpush_url')
             thunderpush_port = get_config('thunderpush_port')
-            t = Thunder(apikey=client_secret, apisecret=server_secret, host=thunderpush_url, port=thunderpush_port)
+            
+            if thunderpush_port == 443:
+                use_ssl = True
+            else:
+                use_ssl = False
+                
+            t = Thunder(apikey=client_secret, apisecret=server_secret, host=thunderpush_url, port=thunderpush_port, use_ssl=use_ssl)
             t.send_message_to_channel(channel='all_teams', message={'title': title, 'msg': msg})
             return '', 200
 
