@@ -10,7 +10,8 @@ from flask import (
 )
 
 from CTFd.models import db
-from CTFd.utils import admins_only, get_config, set_config
+from CTFd.utils.decorators import admins_only
+from CTFd.utils import get_config, set_config
 from CTFd import utils
 
 from thunderclient import Thunder
